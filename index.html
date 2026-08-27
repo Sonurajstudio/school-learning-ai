@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="School Learning AI - Ask questions and learn easily">
+
+    <title>School Learning AI</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        .header {
+            width: 100%;
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .logo-text h1 {
+            font-size: 20px;
+            color: #111827;
+        }
+
+        .logo-text p {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 3px;
+        }
+
+        .header-button {
+            border: none;
+            background: #eef2ff;
+            color: #3730a3;
+            padding: 10px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 45px 20px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            color: #111827;
+            margin-bottom: 12px;
+        }
+
+        .hero h2 span {
+            color: #2563eb;
+        }
+
+        .hero p {
+            font-size: 17px;
+            color: #6b7280;
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.6;
+        }
+
+        .learning-box {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .option-box label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+
+        select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            background: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        select:focus {
+            border-color: #2563eb;
+        }
+
+        .question-label {
+            display: block;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #374151;
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            resize: vertical;
+            border: 1px solid #d1d5db;
+            border-radius: 12px;
+            padding: 15px;
+            font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
+            outline: none;
+        }
+
+        textarea:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .ask-area {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 15px;
+        }
+
+        .ask-button {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 13px 25px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .ask-button:hover {
+            background: #1d4ed8;
+        }
+
+        .answer-box {
+            margin-top: 25px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 20px;
+            display: none;
+        }
+
+        .answer-title {
+            font-size: 17px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            color: #111827;
+        }
+
+        .answer-text {
+            line-height: 1.7;
+            color: #4b5563;
+            white-space: pre-wrap;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .feature {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .feature-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .feature h3 {
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .feature p {
+            font-size: 12px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        @media (max-width: 800px) {
+
+            .hero h2 {
+                font-size: 32px;
+            }
+
+            .features {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 12px 15px;
+            }
+
+            .logo-text h1 {
+                font-size: 16px;
+            }
+
+            .header-button {
+                display: none;
+            }
+
+            .main {
+                padding: 30px 15px;
+            }
+
+            .hero h2 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .learning-box {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                AI
+            </div>
+
+            <div class="logo-text">
+                <h1>School Learning AI</h1>
+                <p>Smart learning assistant</p>
+            </div>
+
+        </div>
+
+        <button class="header-button"
+                onclick="showInfo()">
+            About
+        </button>
+
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <h2>
+                Learn Anything with
+                <span>AI</span>
+            </h2>
+
+            <p>
+                Ask your school questions and get easy,
+                clear and step-by-step explanations.
+            </p>
+
+        </section>
+
+
+        <!-- LEARNING BOX -->
+        <section class="learning-box">
+
+            <div class="options">
+
+                <div class="option-box">
+
+                    <label for="classSelect">
+                        Select Class
+                    </label>
+
+                    <select id="classSelect">
+
+                        <option value="1">
+                            Class 1
+                        </option>
+
+                        <option value="2">
+                            Class 2
+                        </option>
+
+                        <option value="3">
+                            Class 3
+                        </option>
+
+                        <option value="4">
+                            Class 4
+                        </option>
+
+                        <option value="5">
+                            Class 5
+                        </option>
+
+                        <option value="6">
+                            Class 6
+                        </option>
+
+                        <option value="7">
+                            Class 7
+                        </option>
+
+                        <option value="8">
+                            Class 8
+                        </option>
+
+                        <option value="9">
+                            Class 9
+                        </option>
+
+                        <option value="10">
+                            Class 10
+                        </option>
+
+                        <option value="11">
+                            Class 11
+                        </option>
+
+                        <option value="12">
+                            Class 12
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="option-box">
+
+                    <label for="languageSelect">
+                        Answer Language
+                    </label>
+
+                    <select id="languageSelect">
+
+                        <option value="hindi">
+                            Hindi
+                        </option>
+
+                        <option value="english">
+                            English
+                        </option>
+
+                        <option value="hinglish">
+                            Hinglish
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <label class="question-label"
+                   for="question">
+
+                Ask Your Question
+
+            </label>
+
+
+            <textarea
+                id="question"
+                placeholder="Example: Photosynthesis kya hai?&#10;&#10;Ya: 25 × 48 solve karo..."
+            ></textarea>
+
+
+            <div class="ask-area">
+
+                <button class="ask-button"
+                        onclick="askQuestion()">
+
+                    🤖 Ask AI
+
+                </button>
+
+            </div>
+
+
+            <!-- ANSWER -->
+            <div class="answer-box"
+                 id="answerBox">
+
+                <div class="answer-title">
+                    🤖 AI Answer
+                </div>
+
+                <div class="answer-text"
+                     id="answerText">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FEATURES -->
+        <section class="features">
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🧮
+                </div>
+
+                <h3>
+                    Maths
+                </h3>
+
+                <p>
+                    Step-by-step maths solutions.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🔬
+                </div>
+
+                <h3>
+                    Science
+                </h3>
+
+                <p>
+                    Easy science explanations.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📚
+                </div>
+
+                <h3>
+                    Homework
+                </h3>
+
+                <p>
+                    Understand your homework.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🌐
+                </div>
+
+                <h3>
+                    Languages
+                </h3>
+
+                <p>
+                    Hindi, English and Hinglish.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        © 2026 School Learning AI
+        • Made for students
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        function askQuestion() {
+
+            const question =
+                document.getElementById("question").value.trim();
+
+            const classValue =
+                document.getElementById("classSelect").value;
+
+            const language =
+                document.getElementById("languageSelect").value;
+
+            const answerBox =
+                document.getElementById("answerBox");
+
+            const answerText =
+                document.getElementById("answerText");
+
+
+            if (question === "") {
+
+                alert("Please enter your question.");
+
+                return;
+            }
+
+
+            answerBox.style.display = "block";
+
+
+            answerText.textContent =
+                "Question received!\n\n" +
+                "Class: " + classValue + "\n" +
+                "Language: " + language + "\n\n" +
+                "AI system yahan answer dega.\n\n" +
+                "Next step mein hum is website ko real AI se connect karenge.";
+
+        }
+
+
+        function showInfo() {
+
+            alert(
+                "School Learning AI\n\n" +
+                "A learning assistant for school students."
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>
